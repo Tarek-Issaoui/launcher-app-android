@@ -41,11 +41,6 @@ const myReducer= (state=initialState,action)=>{
                 }),
                 launchedApps:state.launchedApps?.filter(el=>el.label!==action.label)
                }
-        case 'search':
-            return {
-                ...state,
-                launchedApps:state.launchedApps.filter((el)=>el.label.toLowerCase()(indexOf(query))!==-1)
-            }
                default:
                    return state
     }

@@ -3,13 +3,13 @@ import React, { useState, createContext } from "react";
 const MyContext = createContext();
 
 const MyContextProvider = ({ children }) => {
-  const [data, setData] = useState({
-    appsFounded:[],
-    appsChecked:[]
+  const [searchedData, setSearchedData] = useState({
+    searchedDataFounded:[],
+    query:''
   });
 
   return (
-    <MyContext.Provider value={[data, setData]}>
+    <MyContext.Provider value={[searchedData, setSearchedData]}>
       {children}
     </MyContext.Provider>
   );

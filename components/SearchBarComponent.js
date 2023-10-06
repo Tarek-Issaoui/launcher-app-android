@@ -1,12 +1,27 @@
-
-import React,{useState} from 'react'
+/**
+ * @refresh reset
+ */
+import React,{useContext, useState} from 'react'
 import { View, TextInput, Image, StyleSheet, Button ,Alert } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import { useDispatch,useSelector } from 'react-redux';
+import { MyContext } from './Context';
 
 
 const SearchBarComponent = () => {
+  const checkedApps=useSelector(state=>state.launchedApps);
+  const [searchedData,setSearchedData]=useContext(MyContext)
+  // const dispatch=useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
-  const onChangeSearch = query => setSearchQuery(query);
+  const onChangeSearch = query => {
+    setSearchQuery(query)
+    setSearchedData(()=>(
+      {
+        searchedDataFounded:checkedApps?.filter((el)=>el.label.toLowerCase().indexOf(query.toLowerCase())!==-1),
+        query:query
+      }
+    ))
+  };
   return (
     <View style={styles.container}>
     <View style={styles.searchContainer}>
@@ -19,7 +34,7 @@ const SearchBarComponent = () => {
       icon={require('../icons/goBack.png')}
       size={20}
       iconColor='white'
-      onPress={() => setSearchQuery()}
+      onPress={()=>setSearchQuery('')}
     />}
       <TextInput
         style={styles.input}
