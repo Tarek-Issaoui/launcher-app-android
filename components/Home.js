@@ -18,6 +18,7 @@ import { Button, Dialog, FAB, IconButton, PaperProvider, Portal } from 'react-na
 import InstalledApps from './InstalledApps';
 import { Avatar } from '@rneui/themed';
 import { MyContext } from './Context';
+import { RNLauncherKitHelper } from 'react-native-launcher-kit';
 const Home = ({navigation}) => {
   const checkedApps=useSelector(state=>state.launchedApps);
   // const [data,setData]=useState(checkedApps)
@@ -30,6 +31,7 @@ const Home = ({navigation}) => {
   useEffect(()=>{
     dispatch({type:'retrieve'})
 },[checkedApps,visible])
+console.log(checkedApps)
   return (
     <PaperProvider>
       <ScrollView style={{backgroundColor:"#21262d"}}>
@@ -55,6 +57,7 @@ const Home = ({navigation}) => {
         return(
           <View key={index} style={{display:'flex',width:'25%',height:'80',alignItems:'center',marginBottom:10 }}>
             <Avatar
+              onPress={()=>RNLauncherKitHelper.launchApplication(item.packageName)}
               source={{uri: `data:image/jpeg;base64,${item.icon}`}}
               size={50}
               iconStyle={{margin:10}}
@@ -66,6 +69,7 @@ const Home = ({navigation}) => {
         return(
           <View key={index} style={{display:'flex',width:'25%',height:'80',alignItems:'center',marginBottom:10 }}>
             <Avatar
+              onPress={()=>RNLauncherKitHelper.launchApplication(item.packageName)}
               source={{uri: `data:image/jpeg;base64,${item.icon}`}}
               size={50}
               iconStyle={{margin:10}}
@@ -79,12 +83,6 @@ const Home = ({navigation}) => {
     </PaperProvider>
   );
 };
-// const mapStateToProps=(state)=>{
-//   return{
-//     allApps:state.allApps,
-//     launchedApps:state.launchedApps
-//   }
-// }
 
 export default Home;
 

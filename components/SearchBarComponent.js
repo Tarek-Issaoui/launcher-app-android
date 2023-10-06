@@ -22,6 +22,15 @@ const SearchBarComponent = () => {
       }
     ))
   };
+  const cancel=()=>{
+    setSearchQuery('')
+    setSearchedData(()=>(
+      {
+        searchedDataFounded:[],
+        query:''
+      }
+    ))
+  }
   return (
     <View style={styles.container}>
     <View style={styles.searchContainer}>
@@ -34,7 +43,7 @@ const SearchBarComponent = () => {
       icon={require('../icons/goBack.png')}
       size={20}
       iconColor='white'
-      onPress={()=>setSearchQuery('')}
+      onPress={cancel}
     />}
       <TextInput
         style={styles.input}
